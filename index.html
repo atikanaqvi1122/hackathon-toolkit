@@ -1,45 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hackathon Toolkit</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hackadmin — team log</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="sidebar">
-        <h2>HackAdmin</h2>
-        <nav>
-            <p>Dashboard Tools</p>
-        </nav>
+  <aside class="sidebar">
+    <div class="brand"><span class="prompt">$</span>&nbsp;hackadmin<span class="cursor"></span></div>
+    <nav class="nav-group">
+      <div class="nav-label">workspace</div>
+      <div class="nav-item active">teams.log</div>
+      <div class="nav-item">judging</div>
+      <div class="nav-item">export</div>
+    </nav>
+    <div class="sidebar-footer">
+      run · local<br>
+      storage: browser
+    </div>
+  </aside>
+
+  <main class="content">
+    <div class="page-head">
+      <h1>teams<span class="path">.log</span></h1>
+      <div class="stat-pill" id="statPill"><b>0</b> / 0 shipped</div>
+    </div>
+    <p class="subtitle">Track every squad's repo and submission status for this event.</p>
+
+    <div class="build-bar-wrap">
+      <div class="build-bar-label"><span>BUILD STATUS</span><span id="buildPct">0%</span></div>
+      <div class="build-bar">
+        <div class="seg done" id="segDone" style="width:0%"></div>
+        <div class="seg pending" id="segPending" style="width:0%"></div>
+      </div>
     </div>
 
-    <main class="content">
-        <h3>Team Management</h3>
-        <div class="input-group">
-            <input type="text" id="teamName" placeholder="Team Name">
-            <input type="url" id="link" placeholder="GitHub URL">
-            <button onclick="addTeam()">Add Team</button>
-        </div>
+    <div class="cmd-line">
+      <span class="p">&gt;</span>
+      <input type="text" id="teamName" placeholder="add-team --name &quot;Byte Me&quot;">
+      <input type="url" id="link" placeholder="--repo github.com/team/project">
+      <button class="btn btn-primary" onclick="addTeam()">run</button>
+    </div>
 
-        <table id="teamTable">
-            <thead>
-                <tr>
-                    <th>Team</th>
-                    <th>Link</th>
-                    <th>Status</th>
-                    <th>Rating</th>
-                    <th>Comments</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <!-- Ensure this ID matches the one in your script -->
-            <tbody id="teamBody"></tbody>
-        </table>
-    </main>
+    <div class="log-wrap">
+      <table id="teamTable">
+        <thead>
+          <tr>
+            <th>Team</th>
+            <th>Repo</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="teamBody"></tbody>
+      </table>
+      <div class="empty-state" id="emptyState" style="display:none;">
+        no teams logged yet — run <b>add-team</b> above to log your first entry<span class="cursor"></span>
+      </div>
+    </div>
+  </main>
 
-    <!-- Script at the bottom ensures elements exist before JS runs -->
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
