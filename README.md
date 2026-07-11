@@ -19,6 +19,28 @@ A lightweight, single-page dashboard for running a hackathon: log teams, track t
 - **Dark / light theme** — toggle from the sidebar; your choice is remembered.
 - **Persistent storage** — everything is saved to the browser's `localStorage`, so data survives a page refresh.
 
+## Screenshots
+
+### Team log
+The main view — teams, repo links, member counts, average score, status, and quick actions, with the build-status bar tracking overall completion.
+
+![Team log view](screenshots/team-log.png)
+
+### Team details & judging
+Expanding a row reveals the project description, full member roster, and the Innovation / Execution / Presentation sliders with a live average.
+
+![Details panel with judging sliders](screenshots/details-panel.png)
+
+### Leaderboard
+Teams ranked by average judging score, with medals for the top 3 and a per-criterion breakdown.
+
+![Leaderboard view](screenshots/leaderboard.png)
+
+### Theme toggle
+Switch between dark and light mode from the sidebar — your preference is remembered on reload.
+
+![Theme toggle](screenshots/theme-toggle.png)
+
 ## Getting started
 
 1. Download all three files: `index.html`, `style.css`, `script.js`.
