@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hackathon Toolkit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Hackathon Team Tracker</h1>
+    <input type="text" id="teamName" placeholder="Enter Team Name">
+    <button onclick="addTeam()">Add Team</button>
+    
+    <table id="teamTable">
+        <tr><th>Team Name</th><th>Status</th></tr>
+    </table>
+
+    <script>
+        function addTeam() {
+            let name = document.getElementById("teamName").value;
+            let table = document.getElementById("teamTable");
+            let row = table.insertRow(1);
+            row.insertCell(0).innerHTML = name;
+            row.insertCell(1).innerHTML = "In Progress";
+        }
+    </script>
+</body>
+</html>
