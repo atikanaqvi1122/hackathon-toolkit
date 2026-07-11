@@ -1,18 +1,74 @@
 # Hackathon Toolkit 🛠️
+# HackAdmin
 
-A lightweight, browser-based dashboard designed to streamline hackathon logistics, team registration, and project submission tracking.
+A lightweight, single-page dashboard for running a hackathon: log teams, track their repos and rosters, judge them against criteria, and export everything to CSV. No backend, no build step — just open `index.html` in a browser.
 
-### Why I built this
-As a student organizer, I recognized that managing team data during fast-paced hackathons can be chaotic. I built this to automate team tracking and ensure a smooth submission process.
+![status](https://img.shields.io/badge/build-no%20dependencies-3fb950)
+![storage](https://img.shields.io/badge/storage-browser%20localStorage-a371f7)
 
-### Features
-- **Team Registration:** Add new teams to the database instantly.
-- **Status Tracking:** Toggle project status between "In Progress" and "Submitted."
-- **Data Visualization:** A clean table layout for real-time overview.
+## Features
 
-### Tech Stack
-- **Frontend:** HTML5, CSS3, Vanilla JavaScript.
+- **Team log** — add a team with its name, GitHub repo, and member names in one line, git-commit style.
+- **Status tracking** — toggle each team between `in progress` and `submitted`, with a live build-status bar showing overall completion.
+- **Judging criteria** — score every team on Innovation, Execution, and Presentation (0–10 each) via sliders in an expandable details panel. An average is calculated automatically.
+- **Team details** — expand any row to add a project description and see the full member roster as chips.
+- **Leaderboard** — a ranked, medal-topped view sorted by average judging score.
+- **Search & sort** — filter teams by name, member, or description; click column headers to sort by name, score, or status.
+- **Inline editing** — edit a team's name, repo, or members without leaving the row.
+- **CSV export** — download all team data (roster, description, scores, status) as `teams.csv`.
+- **Dark / light theme** — toggle from the sidebar; your choice is remembered.
+- **Persistent storage** — everything is saved to the browser's `localStorage`, so data survives a page refresh.
 
-### Roadmap
-- [ ] Add CSV export functionality.
-- [ ] Implement local browser storage to save data between refreshes.
+## Getting started
+
+1. Download all three files: `index.html`, `style.css`, `script.js`.
+2. Keep them together in the same folder — `index.html` loads the other two by relative path.
+3. Open `index.html` in any modern browser (Chrome, Firefox, Edge, Safari).
+
+No installation, no server, no dependencies to install. An internet connection is only needed to load the Google Fonts (JetBrains Mono, Inter); the app still works offline, just with fallback fonts.
+
+## Usage
+
+| Action | How |
+|---|---|
+| Add a team | Fill in the `add-team` line (name, repo, members) and click **run** or press Enter |
+| Change status | Click the status badge, or the ⟳ icon |
+| View/edit details | Click the ▸ arrow to expand a row, or ✎ to edit name/repo/members |
+| Score a team | Expand the row, drag the Innovation / Execution / Presentation sliders |
+| Search | Type in the filter box — matches name, members, and description |
+| Sort | Click the **Team**, **Score**, or **Status** column headers |
+| See rankings | Click **🏆 leaderboard** in the toolbar |
+| Export data | Click **↓ export .csv** |
+| Switch theme | Click the theme button at the bottom of the sidebar |
+| Delete a team | Click ✕ in the row's actions |
+
+## File structure
+
+```
+.
+├── index.html   # page structure and layout
+├── style.css    # theme, layout, and component styling
+├── script.js    # app state, rendering, and all interactivity
+└── README.md
+```
+
+## Data & privacy
+
+All data is stored locally in your browser via `localStorage` — nothing is sent to a server. This also means:
+- Data is specific to one browser on one device; it won't sync across devices.
+- Clearing your browser's site data/cache will erase your teams.
+- Use **export .csv** regularly if you want a backup outside the browser.
+
+## Tech stack
+
+Plain HTML, CSS, and JavaScript — no framework, no build tools, no npm packages. Fonts are loaded from Google Fonts (JetBrains Mono for UI/data, Inter for body text).
+
+## Known limitations
+
+- Single-device only (no multi-user sync or shared judging).
+- No CSV *import* yet — export only.
+- No undo after deleting a team.
+
+## License
+
+Use, modify, and adapt freely for your own event.
