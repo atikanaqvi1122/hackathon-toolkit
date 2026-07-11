@@ -6,22 +6,36 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Hackathon Team Tracker</h1>
-    <input type="text" id="teamName" placeholder="Enter Team Name">
-    <button onclick="addTeam()">Add Team</button>
-    
-    <table id="teamTable">
-        <tr><th>Team Name</th><th>Status</th></tr>
-    </table>
+    <div class="sidebar">
+        <h2>HackAdmin</h2>
+        <nav>
+            <p>Dashboard Tools</p>
+        </nav>
+    </div>
 
-    <script>
-        function addTeam() {
-            let name = document.getElementById("teamName").value;
-            let table = document.getElementById("teamTable");
-            let row = table.insertRow(1);
-            row.insertCell(0).innerHTML = name;
-            row.insertCell(1).innerHTML = "In Progress";
-        }
-    </script>
+    <main class="content">
+        <h3>Team Management</h3>
+        <div class="input-group">
+            <input type="text" id="teamName" placeholder="Team Name">
+            <input type="url" id="link" placeholder="GitHub URL">
+            <button onclick="addTeam()">Add Team</button>
+        </div>
+
+        <table id="teamTable">
+            <thead>
+                <tr>
+                    <th>Team</th>
+                    <th>Link</th>
+                    <th>Status</th>
+                    <th>Rating</th>
+                    <th>Comments</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="teamBody"></tbody>
+        </table>
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
