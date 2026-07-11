@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,17 +19,20 @@
       <div class="nav-item">export</div>
     </nav>
     <div class="sidebar-footer">
-      run · local<br>
-      storage: browser
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">☾ dark mode</button>
+      <div class="sidebar-meta">run · local<br>storage: browser</div>
     </div>
   </aside>
 
   <main class="content">
     <div class="page-head">
       <h1>teams<span class="path">.log</span></h1>
-      <div class="stat-pill" id="statPill"><b>0</b> / 0 shipped</div>
+      <div class="pill-group">
+        <div class="stat-pill" id="statPill"><b>0</b> / 0 shipped</div>
+        <div class="stat-pill" id="avgPill">avg score <b>—</b></div>
+      </div>
     </div>
-    <p class="subtitle">Track every squad's repo and submission status for this event.</p>
+    <p class="subtitle">Track every squad's repo, roster, description and judging score for this event.</p>
 
     <div class="build-bar-wrap">
       <div class="build-bar-label"><span>BUILD STATUS</span><span id="buildPct">0%</span></div>
@@ -41,26 +44,43 @@
 
     <div class="cmd-line">
       <span class="p">&gt;</span>
-      <input type="text" id="teamName" placeholder="add-team --name &quot;Byte Me&quot;">
+      <input type="text" id="teamName" placeholder='add-team --name "Byte Me"'>
       <input type="url" id="link" placeholder="--repo github.com/team/project">
+      <input type="text" id="members" placeholder="--members Ana, Sam, Lee">
       <button class="btn btn-primary" onclick="addTeam()">run</button>
     </div>
 
-    <div class="log-wrap">
+    <div class="toolbar">
+      <input type="text" id="searchInput" class="search-input" placeholder="⌕ filter --name">
+      <div class="toolbar-right">
+        <button class="btn btn-ghost" id="viewToggleBtn" onclick="toggleView()">🏆 leaderboard</button>
+        <button class="btn btn-ghost" id="exportBtn" onclick="exportCsv()">↓ export .csv</button>
+      </div>
+    </div>
+
+    <!-- LOG VIEW -->
+    <div class="log-wrap" id="logWrap">
       <table id="teamTable">
         <thead>
           <tr>
-            <th>Team</th>
+            <th></th>
+            <th class="sortable" data-key="name">Team <span class="sort-arrow" id="arrow-name"></span></th>
             <th>Repo</th>
-            <th>Status</th>
+            <th>Members</th>
+            <th class="sortable" data-key="score">Score <span class="sort-arrow" id="arrow-score"></span></th>
+            <th class="sortable" data-key="status">Status <span class="sort-arrow" id="arrow-status"></span></th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody id="teamBody"></tbody>
       </table>
-      <div class="empty-state" id="emptyState" style="display:none;">
-        no teams logged yet — run <b>add-team</b> above to log your first entry<span class="cursor"></span>
-      </div>
+      <div class="empty-state" id="emptyState" style="display:none;"></div>
+    </div>
+
+    <!-- LEADERBOARD VIEW -->
+    <div class="leaderboard-wrap" id="leaderboardWrap" style="display:none;">
+      <div class="leaderboard-note">ranked by average judging score (innovation · execution · presentation)</div>
+      <div id="leaderboardList"></div>
     </div>
   </main>
 
