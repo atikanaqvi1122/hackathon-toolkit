@@ -1,3 +1,16 @@
+// Load data when the page opens
+window.onload = function() {
+    let savedData = localStorage.getItem("hackathonData");
+    if (savedData) {
+        document.getElementById("teamBody").innerHTML = savedData;
+    }
+};
+
+function saveData() {
+    let tbody = document.getElementById("teamBody");
+    localStorage.setItem("hackathonData", tbody.innerHTML);
+}
+
 function addTeam() {
     let name = document.getElementById("teamName").value;
     let link = document.getElementById("link").value;
@@ -14,12 +27,19 @@ function addTeam() {
         <td><input type="text" placeholder="Note..."></td>
         <td><button onclick="toggleStatus(this)">Toggle</button></td>
     `;
+    
     document.getElementById("teamName").value = "";
     document.getElementById("link").value = "";
+    
+    // Save after adding
+    saveData();
 }
 
 function toggleStatus(btn) {
     let row = btn.parentNode.parentNode;
     let statusCell = row.cells[2];
     statusCell.innerText = (statusCell.innerText === "In Progress") ? "Submitted" : "In Progress";
+    
+    // Save after changing status
+    saveData();
 }
